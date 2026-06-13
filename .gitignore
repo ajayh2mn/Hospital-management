@@ -1,0 +1,26 @@
+# ── Frontend ──────────────────────────────────────
+hospital-frontend/node_modules/
+hospital-frontend/build/
+hospital-frontend/.env
+hospital-frontend/.env.local
+hospital-frontend/.env.production
+
+# ── Backend ───────────────────────────────────────
+hospital-backend/target/
+hospital-backend/*.iml
+hospital-backend/.mvn/
+
+# Sensitive config — keep application.yml local
+hospital-backend/src/main/resources/application.yml
+
+# ── Claude Code local settings ────────────────────
+.claude/
+
+# ── IDEs / OS ─────────────────────────────────────
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+*.class
+*.log

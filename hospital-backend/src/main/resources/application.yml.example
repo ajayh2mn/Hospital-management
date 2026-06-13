@@ -1,0 +1,43 @@
+# Copy this file to application.yml and fill in your own values.
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: hospital-management-system
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hospital_db
+    username: YOUR_POSTGRES_USERNAME
+    password: YOUR_POSTGRES_PASSWORD
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+jwt:
+  secret: YOUR_256_BIT_HEX_SECRET_HERE
+  expiration: 86400000
+  refresh-expiration: 604800000
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+
+logging:
+  level:
+    com.hospital: INFO
+    org.springframework.security: WARN
