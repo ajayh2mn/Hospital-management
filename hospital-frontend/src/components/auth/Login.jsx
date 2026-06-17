@@ -28,9 +28,11 @@ const Login = () => {
       const authData = response.data.data;
       login(authData);
       toast.success(`Welcome back, ${authData.fullName}!`);
-      if (authData.roles.includes('ROLE_ADMIN')) navigate('/admin/dashboard');
-      else if (authData.roles.includes('ROLE_DOCTOR')) navigate('/appointments');
-      else navigate('/dashboard');
+      if (authData.roles.includes('ROLE_ADMIN')) {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/employee/dashboard');
+      }
     } catch (err) {
       const message = err.response?.data?.error || 'Login failed. Please try again.';
       setError(message);

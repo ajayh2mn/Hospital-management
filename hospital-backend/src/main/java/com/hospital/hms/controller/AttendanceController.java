@@ -14,6 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import com.hospital.hms.service.StaffService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +30,7 @@ import java.util.Map;
 public class AttendanceController {
 
     private final AttendanceService attendanceService;
+    private final StaffService staffService;
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'HR', 'NURSE')")
@@ -67,6 +72,37 @@ public class AttendanceController {
             @PathVariable Long staffId,
             @RequestParam int month,
             @RequestParam int year) {
+        return ResponseEntity.ok(
+                ApiResponse.success(attendanceService.getMonthlySummary(staffId, month, year)));
+    }
+
+    // ── Employee self-service endpoints ──
+
+    @PostMapping("/me/mark")
+    public ResponseEntity<ApiResponse<Attendance>> markMyAttendance(
+            @Valid @RequestBody AttendanceRequest request) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long staffId = staffService.getStaffEntityByUsername(auth.getName()).getId();
+        request.setStaffId(staffId);
+        return ResponseEntity.ok(
+                ApiResponse.success("Attendance marked", attendanceService.markAttendance(request)));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<ApiResponse<List<Attendance>>> getMyAttendance(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long staffId = staffService.getStaffEntityByUsername(auth.getName()).getId();
+        return ResponseEntity.ok(
+                ApiResponse.success(attendanceService.getStaffAttendance(staffId, from, to)));
+    }
+
+    @GetMapping("/me/monthly-summary")
+    public ResponseEntity<ApiResponse<Map<AttendanceStatus, Long>>> getMyMonthlySummary(
+            @RequestParam int month, @RequestParam int year) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long staffId = staffService.getStaffEntityByUsername(auth.getName()).getId();
         return ResponseEntity.ok(
                 ApiResponse.success(attendanceService.getMonthlySummary(staffId, month, year)));
     }

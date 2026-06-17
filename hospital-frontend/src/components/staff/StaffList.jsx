@@ -90,11 +90,15 @@ const StaffList = () => {
   const handleSave = async () => {
     setSaving(true);
     try {
+      // Strip empty strings so optional fields don't fail backend validation
+      const payload = Object.fromEntries(
+        Object.entries(formData).filter(([, v]) => v !== '' && v !== null && v !== undefined)
+      );
       if (editId) {
-        await updateStaff(editId, formData);
+        await updateStaff(editId, payload);
         toast.success('Staff updated successfully');
       } else {
-        await createStaff(formData);
+        await createStaff(payload);
         toast.success('Staff created successfully');
       }
       setShowModal(false);

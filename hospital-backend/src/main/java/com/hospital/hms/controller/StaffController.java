@@ -14,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import java.util.List;
 
 /**
@@ -76,6 +79,13 @@ public class StaffController {
     public ResponseEntity<ApiResponse<Void>> deleteStaff(@PathVariable Long id) {
         staffService.deleteStaff(id);
         return ResponseEntity.ok(ApiResponse.success("Staff deleted successfully", null));
+    }
+
+    @GetMapping("/me")
+    @Operation(summary = "Get my own staff profile")
+    public ResponseEntity<ApiResponse<StaffResponse>> getMyProfile() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.ok(ApiResponse.success(staffService.getStaffByUsername(auth.getName())));
     }
 
     @GetMapping("/search")

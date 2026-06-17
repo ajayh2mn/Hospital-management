@@ -1,28 +1,3 @@
-/**
- * App.js — the root component that sets up routing.
- *
- * react-router-dom v6 concepts:
- * - BrowserRouter: enables URL-based routing in the browser
- * - Routes: container for all Route definitions
- * - Route: maps a URL path to a component
- * - Outlet: renders child routes inside a layout component
- * - Navigate: programmatic redirect
- *
- * Route tree:
- *   /login           → Login (no auth required)
- *   /               → redirect to /admin/dashboard
- *   / (protected)
- *     MainLayout (sidebar + navbar)
- *       /admin/dashboard → AdminDashboard
- *       /staff           → StaffList
- *       /patients        → PatientList
- *       /attendance      → AttendanceManagement
- *       /payroll         → PayrollManagement
- *       /appointments    → AppointmentList
- *       /queue           → QueueManagement
- *       /tickets         → SupportTickets
- */
-
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -34,49 +9,62 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import MainLayout from './components/layout/MainLayout';
 import Login from './components/auth/Login';
-import AdminDashboard from './components/admin/AdminDashboard';
-import StaffList from './components/staff/StaffList';
-import PatientList from './components/patient/PatientList';
+
+// Admin pages
+import AdminDashboard    from './components/admin/AdminDashboard';
+import StaffList         from './components/staff/StaffList';
+import PatientList       from './components/patient/PatientList';
 import AttendanceManagement from './components/attendance/AttendanceManagement';
 import PayrollManagement from './components/payroll/PayrollManagement';
-import AppointmentList from './components/appointment/AppointmentList';
-import QueueManagement from './components/queue/QueueManagement';
-import SupportTickets from './components/support/SupportTickets';
-import EmailSupport from './components/email/EmailSupport';
+import AppointmentList   from './components/appointment/AppointmentList';
+import QueueManagement   from './components/queue/QueueManagement';
+import SupportTickets    from './components/support/SupportTickets';
+import EmailSupport      from './components/email/EmailSupport';
+
+// Employee pages
+import EmployeeDashboard from './components/employee/EmployeeDashboard';
+import MyAttendance      from './components/employee/MyAttendance';
+import WorkSchedule      from './components/employee/WorkSchedule';
+import MyPayslips        from './components/employee/MyPayslips';
 
 function App() {
   return (
-    // AuthProvider wraps everything — any component can now call useAuth()
     <AuthProvider>
       <BrowserRouter>
-        {/* ToastContainer renders notification toasts in the corner */}
         <ToastContainer position="top-right" autoClose={3000} />
 
         <Routes>
-          {/* Public routes */}
+          {/* Public */}
           <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Navigate to="/login" replace />} />
 
-          {/* Redirect root to dashboard */}
-          <Route path="/" element={<Navigate to="/admin/dashboard" replace />} />
-
-          {/* Protected routes — require login */}
+          {/* All protected routes share the same MainLayout (sidebar + navbar) */}
           <Route element={<ProtectedRoute />}>
-            {/* All these routes render inside MainLayout (with sidebar) */}
             <Route element={<MainLayout />}>
+
+              {/* ── Admin routes ── */}
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/staff" element={<StaffList />} />
-              <Route path="/patients" element={<PatientList />} />
-              <Route path="/attendance" element={<AttendanceManagement />} />
-              <Route path="/payroll" element={<PayrollManagement />} />
-              <Route path="/appointments" element={<AppointmentList />} />
-              <Route path="/queue" element={<QueueManagement />} />
-              <Route path="/tickets" element={<SupportTickets />} />
-              <Route path="/email" element={<EmailSupport />} />
-              <Route path="/dashboard" element={<AdminDashboard />} />
+              <Route path="/staff"           element={<StaffList />} />
+              <Route path="/attendance"      element={<AttendanceManagement />} />
+              <Route path="/payroll"         element={<PayrollManagement />} />
+              <Route path="/email"           element={<EmailSupport />} />
+
+              {/* ── Shared routes (admin + employee) ── */}
+              <Route path="/patients"        element={<PatientList />} />
+              <Route path="/appointments"    element={<AppointmentList />} />
+              <Route path="/queue"           element={<QueueManagement />} />
+              <Route path="/tickets"         element={<SupportTickets />} />
+
+              {/* ── Employee routes ── */}
+              <Route path="/employee/dashboard"  element={<EmployeeDashboard />} />
+              <Route path="/employee/attendance" element={<MyAttendance />} />
+              <Route path="/employee/schedule"   element={<WorkSchedule />} />
+              <Route path="/employee/payslips"   element={<MyPayslips />} />
+
             </Route>
           </Route>
 
-          {/* Catch-all — redirect unknown URLs to login */}
+          {/* Catch-all */}
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </BrowserRouter>

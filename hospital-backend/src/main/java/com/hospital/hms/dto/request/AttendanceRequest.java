@@ -24,4 +24,9 @@ public class AttendanceRequest {
 
     private String remarks;
     private Double overtimeHours;
+
+    // Geo-fence coordinates (optional — sent from browser)
+    private Double latitude;
+    private Double longitude;
+    private Double distanceMeters;
 }

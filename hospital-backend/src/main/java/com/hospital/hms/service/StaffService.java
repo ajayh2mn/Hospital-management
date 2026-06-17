@@ -116,6 +116,17 @@ public class StaffService {
         staffRepository.deleteById(id);
     }
 
+    public StaffResponse getStaffByUsername(String username) {
+        Staff staff = staffRepository.findByUserUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Staff profile not found for user: " + username));
+        return toResponse(staff);
+    }
+
+    public Staff getStaffEntityByUsername(String username) {
+        return staffRepository.findByUserUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Staff profile not found for user: " + username));
+    }
+
     public List<StaffResponse> searchStaff(String keyword) {
         return staffRepository.searchStaff(keyword).stream()
                 .map(this::toResponse)

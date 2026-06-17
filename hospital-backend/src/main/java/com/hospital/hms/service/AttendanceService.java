@@ -43,6 +43,9 @@ public class AttendanceService {
                 .status(request.getStatus())
                 .remarks(request.getRemarks())
                 .overtimeHours(request.getOvertimeHours())
+                .checkInLatitude(request.getLatitude())
+                .checkInLongitude(request.getLongitude())
+                .checkInDistanceMeters(request.getDistanceMeters())
                 .build();
 
         return attendanceRepository.save(attendance);

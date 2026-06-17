@@ -49,4 +49,14 @@ public class Attendance extends BaseEntity {
 
     private String remarks;
     private Double overtimeHours;
+
+    // Geo-fence: coordinates captured at check-in
+    @Column(name = "check_in_latitude")
+    private Double checkInLatitude;
+
+    @Column(name = "check_in_longitude")
+    private Double checkInLongitude;
+
+    @Column(name = "check_in_distance_meters")
+    private Double checkInDistanceMeters;
 }

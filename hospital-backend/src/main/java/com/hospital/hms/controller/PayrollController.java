@@ -13,6 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import com.hospital.hms.service.StaffService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import java.util.List;
 
 @RestController
@@ -24,6 +28,7 @@ public class PayrollController {
 
     private final PayrollService payrollService;
     private final PayslipPdfService payslipPdfService;
+    private final StaffService staffService;
 
     @PostMapping("/generate/{staffId}")
     @PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT', 'HR')")
@@ -46,6 +51,13 @@ public class PayrollController {
     @PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT', 'HR')")
     public ResponseEntity<ApiResponse<List<Payroll>>> getStaffPayrollHistory(
             @PathVariable Long staffId) {
+        return ResponseEntity.ok(ApiResponse.success(payrollService.getStaffPayrollHistory(staffId)));
+    }
+
+    @GetMapping("/me/history")
+    public ResponseEntity<ApiResponse<List<Payroll>>> getMyPayrollHistory() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long staffId = staffService.getStaffEntityByUsername(auth.getName()).getId();
         return ResponseEntity.ok(ApiResponse.success(payrollService.getStaffPayrollHistory(staffId)));
     }
 

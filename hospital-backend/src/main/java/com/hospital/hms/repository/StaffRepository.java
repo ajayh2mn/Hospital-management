@@ -31,6 +31,8 @@ public interface StaffRepository extends JpaRepository<Staff, Long> {
     @Query("SELECT s.department, COUNT(s) FROM Staff s WHERE s.status = 'ACTIVE' GROUP BY s.department")
     List<Object[]> countByDepartment();
 
+    Optional<Staff> findByUserUsername(String username);
+
     // Full-text search across name and email
     @Query("SELECT s FROM Staff s WHERE LOWER(s.firstName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
            "OR LOWER(s.lastName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +

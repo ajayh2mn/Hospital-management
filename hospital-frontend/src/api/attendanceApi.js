@@ -9,3 +9,4 @@ export const getMonthlySummary = (staffId, month, year) =>
   axiosInstance.get(`/api/attendance/staff/${staffId}/monthly-summary?month=${month}&year=${year}`);
 export const bulkMarkAttendance = (date, status) =>
   axiosInstance.post(`/api/attendance/bulk-mark?date=${date}&status=${status}`);
+export const getHospitalLocation = () => axiosInstance.get('/api/settings/hospital-location');

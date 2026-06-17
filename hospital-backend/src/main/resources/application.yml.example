@@ -37,6 +37,14 @@ springdoc:
     path: /swagger-ui.html
     tags-sorter: alpha
 
+# Hospital geo-fence — set to your hospital's actual GPS coordinates
+hospital:
+  location:
+    name: Your Hospital Name
+    latitude: 13.0827
+    longitude: 80.2707
+    fence-radius-meters: 200
+
 logging:
   level:
     com.hospital: INFO

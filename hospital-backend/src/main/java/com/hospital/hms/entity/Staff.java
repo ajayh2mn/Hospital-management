@@ -52,7 +52,7 @@ public class Staff extends BaseEntity {
     private String address;
     private String gender;
 
-    @Column(precision = 10, scale = 2)
+    @Column(precision = 15, scale = 2)
     private BigDecimal basicSalary;
 
     @Enumerated(EnumType.STRING)
