@@ -57,13 +57,13 @@ const Login = () => {
       {/* Extra login-page orbs */}
       <div style={{
         position:'fixed', width:500, height:500, borderRadius:'50%',
-        background:'radial-gradient(circle, rgba(124,58,237,0.4) 0%, transparent 70%)',
+        background:'radial-gradient(circle, rgba(100,116,139,0.35) 0%, transparent 70%)',
         top:'-150px', right:'-100px', zIndex:0, pointerEvents:'none',
         animation:'driftOrb 12s ease-in-out infinite',
       }} />
       <div style={{
         position:'fixed', width:400, height:400, borderRadius:'50%',
-        background:'radial-gradient(circle, rgba(6,182,212,0.35) 0%, transparent 70%)',
+        background:'radial-gradient(circle, rgba(148,163,184,0.4) 0%, transparent 70%)',
         bottom:'-120px', left:'-80px', zIndex:0, pointerEvents:'none',
         animation:'driftOrb 9s ease-in-out infinite reverse',
       }} />
@@ -74,12 +74,12 @@ const Login = () => {
           width: '100%',
           maxWidth: '420px',
           minWidth: 0,
-          background: 'rgba(255,255,255,0.07)',
+          background: 'rgba(255,255,255,0.55)',
           backdropFilter: 'blur(30px)',
           WebkitBackdropFilter: 'blur(30px)',
-          border: '1px solid rgba(255,255,255,0.15)',
+          border: '1px solid rgba(255,255,255,0.65)',
           borderRadius: '24px',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+          boxShadow: '0 20px 60px rgba(100,116,139,0.3)',
           overflow: 'hidden',
           position: 'relative',
           zIndex: 1,
@@ -88,7 +88,7 @@ const Login = () => {
         {/* Header */}
         <div
           style={{
-            background: 'linear-gradient(135deg, rgba(124,58,237,0.7), rgba(79,70,229,0.6))',
+            background: 'linear-gradient(135deg, rgba(71,85,105,0.92), rgba(30,41,59,0.88))',
             borderBottom: '1px solid rgba(255,255,255,0.1)',
             padding: '32px 24px',
             textAlign: 'center',
@@ -167,16 +167,16 @@ const Login = () => {
             style={{
               marginTop: 20,
               padding: '10px 14px',
-              background: 'rgba(139,92,246,0.1)',
-              border: '1px solid rgba(139,92,246,0.2)',
+              background: 'rgba(71,85,105,0.08)',
+              border: '1px solid rgba(71,85,105,0.18)',
               borderRadius: 10,
               textAlign: 'center',
             }}
           >
-            <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.4)' }}>
-              Default admin: <strong style={{ color: '#c4b5fd' }}>admin</strong>
+            <span style={{ fontSize: '0.78rem', color: 'rgba(30,41,59,0.55)' }}>
+              Default admin: <strong style={{ color: '#334155' }}>admin</strong>
               {' / '}
-              <strong style={{ color: '#c4b5fd' }}>Admin@123</strong>
+              <strong style={{ color: '#334155' }}>Admin@123</strong>
             </span>
           </div>
         </div>

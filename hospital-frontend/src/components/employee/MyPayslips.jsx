@@ -43,7 +43,7 @@ const MyPayslips = () => {
     <div>
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
         <h4 className="fw-bold mb-0"><FaMoneyBillWave className="me-2" />My Payslips</h4>
-        <div style={{ padding:'6px 16px', borderRadius:12, background:'rgba(6,182,212,0.12)', border:'1px solid rgba(6,182,212,0.3)', fontSize:'0.85rem', color:'#67e8f9' }}>
+        <div style={{ padding:'6px 16px', borderRadius:12, background:'rgba(6,182,212,0.12)', border:'1px solid rgba(6,182,212,0.3)', fontSize:'0.85rem', color:'#0e7490' }}>
           Total Received: <strong>₹{totalEarned.toLocaleString('en-IN')}</strong>
         </div>
       </div>
@@ -51,7 +51,7 @@ const MyPayslips = () => {
       {payrolls.length === 0 ? (
         <Card className="border-0">
           <Card.Body className="text-center py-5">
-            <FaMoneyBillWave size={40} style={{ color:'rgba(255,255,255,0.15)', marginBottom:12 }} />
+            <FaMoneyBillWave size={40} style={{ color:'rgba(100,116,139,0.3)', marginBottom:12 }} />
             <div className="text-muted">No payslips generated yet</div>
             <small className="text-muted">Contact HR to generate your payslip</small>
           </Card.Body>
@@ -78,8 +78,8 @@ const MyPayslips = () => {
                       </td>
                       <td>₹{Number(p.basicSalary).toLocaleString('en-IN')}</td>
                       <td>₹{Number(p.grossSalary).toLocaleString('en-IN')}</td>
-                      <td style={{ color:'#f87171' }}>₹{Number(p.totalDeductions).toLocaleString('en-IN')}</td>
-                      <td style={{ color:'#6ee7b7', fontWeight:700 }}>₹{Number(p.netSalary).toLocaleString('en-IN')}</td>
+                      <td style={{ color:'#dc2626' }}>₹{Number(p.totalDeductions).toLocaleString('en-IN')}</td>
+                      <td style={{ color:'#059669', fontWeight:700 }}>₹{Number(p.netSalary).toLocaleString('en-IN')}</td>
                       <td><small>{p.presentDays}P / {p.absentDays}A</small></td>
                       <td>
                         <Badge bg={statusColors[p.status]||'secondary'}>

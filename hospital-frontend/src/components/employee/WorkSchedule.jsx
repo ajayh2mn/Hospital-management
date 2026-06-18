@@ -4,9 +4,9 @@ import { FaCalendarAlt, FaClock, FaCheckCircle } from 'react-icons/fa';
 import { getMyProfile } from '../../api/employeeApi';
 
 const SHIFTS = {
-  CHIEF_MEDICAL_OFFICER: { label:'Chief Medical Officer', start:'08:00', end:'16:00', days:[1,2,3,4,5], color:'#7c3aed' },
-  SENIOR_DOCTOR:         { label:'Senior Doctor',         start:'09:00', end:'17:00', days:[1,2,3,4,5], color:'#6d28d9' },
-  JUNIOR_DOCTOR:         { label:'Junior Doctor',         start:'08:00', end:'18:00', days:[1,2,3,4,5,6], color:'#5b21b6' },
+  CHIEF_MEDICAL_OFFICER: { label:'Chief Medical Officer', start:'08:00', end:'16:00', days:[1,2,3,4,5], color:'#1e293b' },
+  SENIOR_DOCTOR:         { label:'Senior Doctor',         start:'09:00', end:'17:00', days:[1,2,3,4,5], color:'#334155' },
+  JUNIOR_DOCTOR:         { label:'Junior Doctor',         start:'08:00', end:'18:00', days:[1,2,3,4,5,6], color:'#475569' },
   HEAD_NURSE:            { label:'Head Nurse',            start:'07:00', end:'15:00', days:[1,2,3,4,5,6], color:'#0e7490' },
   STAFF_NURSE:           { label:'Staff Nurse',           start:'07:00', end:'15:00', days:[1,2,3,4,5,6,0], color:'#0369a1' },
   RECEPTIONIST:          { label:'Receptionist',          start:'08:00', end:'17:00', days:[1,2,3,4,5,6], color:'#b45309' },
@@ -78,8 +78,8 @@ const WorkSchedule = () => {
             ].map(item => (
               <div key={item.label} style={{ textAlign:'center', minWidth: 80 }}>
                 <div style={{ fontSize:'1.6rem' }}>{item.icon}</div>
-                <div style={{ fontSize:'1.1rem', fontWeight:700, color:'#fff' }}>{item.value}</div>
-                <div style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.4)' }}>{item.label}</div>
+                <div style={{ fontSize:'1.1rem', fontWeight:700, color:'#1e293b' }}>{item.value}</div>
+                <div style={{ fontSize:'0.72rem', color:'rgba(30,41,59,0.5)' }}>{item.label}</div>
               </div>
             ))}
           </div>
@@ -88,7 +88,7 @@ const WorkSchedule = () => {
 
       {/* Weekly calendar */}
       <Card className="border-0">
-        <Card.Header style={{ background:'transparent', borderBottom:'1px solid rgba(255,255,255,0.08)', fontWeight:600 }}>
+        <Card.Header style={{ background:'transparent', borderBottom:'1px solid rgba(100,116,139,0.15)', fontWeight:600 }}>
           This Week's Schedule
         </Card.Header>
         <Card.Body>
@@ -102,28 +102,28 @@ const WorkSchedule = () => {
                   background: isToday
                     ? `${shift.color}33`
                     : isWorkDay
-                      ? 'rgba(255,255,255,0.05)'
-                      : 'rgba(255,255,255,0.02)',
+                      ? 'rgba(100,116,139,0.08)'
+                      : 'rgba(100,116,139,0.04)',
                   border: isToday
                     ? `2px solid ${shift.color}`
-                    : '1px solid rgba(255,255,255,0.07)',
+                    : '1px solid rgba(100,116,139,0.12)',
                   opacity: isWorkDay ? 1 : 0.45,
                 }}>
-                  <div style={{ fontSize:'0.7rem', color: isToday ? shift.color : 'rgba(255,255,255,0.45)', fontWeight:600, marginBottom:4 }}>
+                  <div style={{ fontSize:'0.7rem', color: isToday ? shift.color : 'rgba(30,41,59,0.5)', fontWeight:600, marginBottom:4 }}>
                     {day.short.toUpperCase()}
                   </div>
-                  <div style={{ fontSize:'1.1rem', fontWeight:700, color: isToday ? '#fff' : 'rgba(255,255,255,0.7)', marginBottom:6 }}>
+                  <div style={{ fontSize:'1.1rem', fontWeight:700, color: isToday ? '#1e293b' : 'rgba(30,41,59,0.75)', marginBottom:6 }}>
                     {day.date.getDate()}
                   </div>
                   {isWorkDay ? (
                     <>
-                      <div style={{ fontSize:'0.65rem', color: isToday ? shift.color : 'rgba(255,255,255,0.5)', marginBottom:2 }}>{shift.start}</div>
-                      <div style={{ width:1, height:14, background:'rgba(255,255,255,0.2)', margin:'0 auto 2px' }} />
-                      <div style={{ fontSize:'0.65rem', color: isToday ? shift.color : 'rgba(255,255,255,0.5)' }}>{shift.end}</div>
+                      <div style={{ fontSize:'0.65rem', color: isToday ? shift.color : 'rgba(30,41,59,0.55)', marginBottom:2 }}>{shift.start}</div>
+                      <div style={{ width:1, height:14, background:'rgba(100,116,139,0.25)', margin:'0 auto 2px' }} />
+                      <div style={{ fontSize:'0.65rem', color: isToday ? shift.color : 'rgba(30,41,59,0.55)' }}>{shift.end}</div>
                       <FaCheckCircle size={11} style={{ color: isToday ? shift.color : '#10b981', marginTop:5 }} />
                     </>
                   ) : (
-                    <div style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.3)', marginTop:4 }}>OFF</div>
+                    <div style={{ fontSize:'0.62rem', color:'rgba(30,41,59,0.35)', marginTop:4 }}>OFF</div>
                   )}
                   {isToday && (
                     <div style={{ marginTop:6, padding:'2px 6px', borderRadius:10, background:shift.color, fontSize:'0.6rem', fontWeight:700, color:'#fff' }}>
@@ -139,7 +139,7 @@ const WorkSchedule = () => {
 
       {/* Monthly overview strip */}
       <Card className="border-0 mt-3">
-        <Card.Header style={{ background:'transparent', borderBottom:'1px solid rgba(255,255,255,0.08)', fontWeight:600 }}>
+        <Card.Header style={{ background:'transparent', borderBottom:'1px solid rgba(100,116,139,0.15)', fontWeight:600 }}>
           This Month at a Glance
         </Card.Header>
         <Card.Body>
@@ -159,17 +159,17 @@ const WorkSchedule = () => {
                     : isWork && isPast
                       ? 'rgba(16,185,129,0.2)'
                       : isWork
-                        ? 'rgba(255,255,255,0.06)'
-                        : 'rgba(255,255,255,0.02)',
-                  border: isT ? 'none' : `1px solid ${isWork ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.04)'}`,
-                  color: isT ? '#fff' : isWork ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.25)',
+                        ? 'rgba(100,116,139,0.1)'
+                        : 'rgba(100,116,139,0.04)',
+                  border: isT ? 'none' : `1px solid ${isWork ? 'rgba(100,116,139,0.18)' : 'rgba(100,116,139,0.08)'}`,
+                  color: isT ? '#fff' : isWork ? 'rgba(30,41,59,0.75)' : 'rgba(30,41,59,0.32)',
                 }}>
                   {i + 1}
                 </div>
               );
             })}
           </div>
-          <div style={{ display:'flex', gap:16, marginTop:12, fontSize:'0.72rem', color:'rgba(255,255,255,0.4)', flexWrap:'wrap' }}>
+          <div style={{ display:'flex', gap:16, marginTop:12, fontSize:'0.72rem', color:'rgba(30,41,59,0.5)', flexWrap:'wrap' }}>
             <span>🟣 Today &nbsp; 🟢 Work day (past) &nbsp; ⬜ Upcoming work &nbsp; ▫️ Off day</span>
           </div>
         </Card.Body>

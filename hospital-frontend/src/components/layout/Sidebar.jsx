@@ -51,10 +51,10 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) => {
 
   const roleName = user?.roles?.[0]?.replace('ROLE_', '') || '';
   const roleColors = {
-    ADMIN:'#8b5cf6', DOCTOR:'#10b981', NURSE:'#06b6d4',
+    ADMIN:'#475569', DOCTOR:'#10b981', NURSE:'#06b6d4',
     HR:'#f59e0b', ACCOUNTANT:'#ef4444', RECEPTIONIST:'#3b82f6', PHARMACIST:'#14b8a6',
   };
-  const roleColor = roleColors[roleName] || '#8b5cf6';
+  const roleColor = roleColors[roleName] || '#475569';
 
   return (
     <aside className={`hms-sidebar ${collapsed ? 'hms-sidebar--collapsed' : ''} ${mobileOpen ? 'hms-sidebar--mobile-open' : ''}`}>
@@ -108,7 +108,7 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) => {
 
       {/* Role label above nav when collapsed */}
       {collapsed && (
-        <div style={{ padding:'8px 0', borderBottom:'1px solid rgba(255,255,255,0.08)', display:'flex', justifyContent:'center' }}>
+        <div style={{ padding:'8px 0', borderBottom:'1px solid rgba(100,116,139,0.15)', display:'flex', justifyContent:'center' }}>
           <div style={{ width:28, height:28, borderRadius:'50%', background:`${roleColor}33`, border:`1px solid ${roleColor}66`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'0.65rem', fontWeight:700, color:roleColor }}>
             {user?.fullName?.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2)}
           </div>

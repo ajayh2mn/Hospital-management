@@ -119,7 +119,7 @@ const MyAttendance = () => {
   };
 
   const geoPanels = {
-    idle:      { bg:'rgba(255,255,255,0.04)', border:'rgba(255,255,255,0.1)',  color:'rgba(255,255,255,0.4)', icon:<FaMapMarkerAlt />,                     label:'Detecting your location…' },
+    idle:      { bg:'rgba(100,116,139,0.06)', border:'rgba(100,116,139,0.18)',  color:'rgba(30,41,59,0.5)', icon:<FaMapMarkerAlt />,                     label:'Detecting your location…' },
     detecting: { bg:'rgba(79,172,254,0.08)',  border:'rgba(79,172,254,0.3)',   color:'#93c5fd', icon:<Spinner animation="border" size="sm" />,             label:'Detecting your location…' },
     inside:    { bg:'rgba(16,185,129,0.1)',   border:'rgba(16,185,129,0.45)',  color:'#6ee7b7', icon:<FaCheckCircle />,                                    label:`Inside hospital — ${distanceMeters}m away ✓` },
     outside:   { bg:'rgba(239,68,68,0.1)',    border:'rgba(239,68,68,0.45)',   color:'#f87171', icon:<FaTimesCircle />,                                    label:`Outside hospital — ${distanceMeters}m away (limit: ${hospitalLocation?.fenceRadiusMeters}m)` },
@@ -162,7 +162,7 @@ const MyAttendance = () => {
             <Card className="border-0 text-center">
               <Card.Body className="py-2 px-1">
                 <div style={{fontSize:'1.4rem', fontWeight:700, color:s.color}}>{summary[s.key]||0}</div>
-                <div style={{fontSize:'0.72rem', color:'rgba(255,255,255,0.45)'}}>{s.label}</div>
+                <div style={{fontSize:'0.72rem', color:'rgba(30,41,59,0.5)'}}>{s.label}</div>
               </Card.Body>
             </Card>
           </Col>
@@ -190,7 +190,7 @@ const MyAttendance = () => {
                       <td><Badge bg={statusColors[r.status]||'secondary'}>{r.status}</Badge></td>
                       <td>
                         {r.checkInDistanceMeters != null ? (
-                          <small style={{color: r.checkInDistanceMeters<=(hospitalLocation?.fenceRadiusMeters||200)?'#6ee7b7':'#f87171'}}>
+                          <small style={{color: r.checkInDistanceMeters<=(hospitalLocation?.fenceRadiusMeters||200)?'#059669':'#dc2626'}}>
                             <FaMapMarkerAlt size={10} className="me-1"/>{r.checkInDistanceMeters}m
                           </small>
                         ) : <small className="text-muted">--</small>}
@@ -219,10 +219,10 @@ const MyAttendance = () => {
                   <div className="d-flex align-items-center gap-3">
                     <span style={{color:geo.color, fontSize:'1.2rem'}}>{geo.icon}</span>
                     <div>
-                      <div style={{fontSize:'0.7rem', color:'rgba(255,255,255,0.4)'}}>AUTO LOCATION DETECTION</div>
+                      <div style={{fontSize:'0.7rem', color:'rgba(30,41,59,0.45)'}}>AUTO LOCATION DETECTION</div>
                       <div style={{fontSize:'0.88rem', color:geo.color, fontWeight:600}}>{geo.label}</div>
                       {userCoords && (
-                        <div style={{fontSize:'0.7rem', color:'rgba(255,255,255,0.3)', marginTop:2}}>
+                        <div style={{fontSize:'0.7rem', color:'rgba(30,41,59,0.35)', marginTop:2}}>
                           {userCoords.latitude.toFixed(5)}, {userCoords.longitude.toFixed(5)}
                         </div>
                       )}
@@ -240,20 +240,20 @@ const MyAttendance = () => {
                     {[
                       {label:`📅 ${new Date().toLocaleDateString('en-IN')}`},
                       {label:`🕐 ${formData.checkInTime}`},
-                      {label:`✅ ${formData.status}`, color: geoStatus==='inside'?'rgba(16,185,129,0.2)':'rgba(239,68,68,0.2)', border: geoStatus==='inside'?'rgba(16,185,129,0.4)':'rgba(239,68,68,0.4)', text: geoStatus==='inside'?'#6ee7b7':'#f87171'},
+                      {label:`✅ ${formData.status}`, color: geoStatus==='inside'?'rgba(16,185,129,0.2)':'rgba(239,68,68,0.2)', border: geoStatus==='inside'?'rgba(16,185,129,0.4)':'rgba(239,68,68,0.4)', text: geoStatus==='inside'?'#059669':'#dc2626'},
                     ].map((chip,i)=>(
                       <span key={i} style={{
                         padding:'3px 10px', borderRadius:20, fontSize:'0.76rem',
-                        background: chip.color||'rgba(255,255,255,0.07)',
-                        border:`1px solid ${chip.border||'rgba(255,255,255,0.12)'}`,
-                        color: chip.text||'rgba(255,255,255,0.7)',
+                        background: chip.color||'rgba(100,116,139,0.1)',
+                        border:`1px solid ${chip.border||'rgba(100,116,139,0.2)'}`,
+                        color: chip.text||'rgba(30,41,59,0.7)',
                       }}>{chip.label}</span>
                     ))}
                   </div>
                 )}
               </div>
               {geoStatus==='outside' && (
-                <div style={{marginTop:8, padding:'8px 12px', background:'rgba(239,68,68,0.07)', border:'1px solid rgba(239,68,68,0.2)', borderRadius:8, fontSize:'0.8rem', color:'#f87171'}}>
+                <div style={{marginTop:8, padding:'8px 12px', background:'rgba(239,68,68,0.07)', border:'1px solid rgba(239,68,68,0.2)', borderRadius:8, fontSize:'0.8rem', color:'#dc2626'}}>
                   You are <strong>{distanceMeters}m</strong> from the hospital (limit: <strong>{hospitalLocation?.fenceRadiusMeters}m</strong>). Marked ABSENT automatically.
                 </div>
               )}
@@ -270,7 +270,7 @@ const MyAttendance = () => {
               <Form.Group>
                 <Form.Label>Status <small className="text-muted">(auto-set)</small></Form.Label>
                 <Form.Control readOnly value={formData.status}
-                  style={{background:formData.status==='PRESENT'?'rgba(16,185,129,0.1)':'rgba(239,68,68,0.1)', color:formData.status==='PRESENT'?'#6ee7b7':'#f87171', fontWeight:600}} />
+                  style={{background:formData.status==='PRESENT'?'rgba(16,185,129,0.1)':'rgba(239,68,68,0.1)', color:formData.status==='PRESENT'?'#059669':'#dc2626', fontWeight:600}} />
               </Form.Group>
             </Col>
             <Col md={12}>

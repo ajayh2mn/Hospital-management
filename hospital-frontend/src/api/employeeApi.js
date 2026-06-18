@@ -7,3 +7,6 @@ export const markMyAttendance  = (data)       => axiosInstance.post('/api/attend
 export const getMyPayrollHistory = ()         => axiosInstance.get('/api/payroll/me/history');
 export const downloadMyPayslip = (id)         => axiosInstance.get(`/api/payroll/${id}/payslip`, { responseType: 'blob' });
 export const getHospitalLocation = ()         => axiosInstance.get('/api/settings/hospital-location');
+export const startMySession    = (data)       => axiosInstance.post('/api/attendance/me/session/start', data);
+export const endMySession      = (data)       => axiosInstance.post('/api/attendance/me/session/end', data);
+export const getMyTodaySession = ()           => axiosInstance.get('/api/attendance/me/session/today');

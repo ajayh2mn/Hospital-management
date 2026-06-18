@@ -30,7 +30,7 @@ const TopNavbar = ({ onHamburgerClick }) => {
 
   const roleName = user?.roles?.[0]?.replace('ROLE_', '') || '';
   const roleColors = {
-    ADMIN: { bg: 'rgba(139,92,246,0.25)', border: 'rgba(139,92,246,0.5)', text: '#c4b5fd' },
+    ADMIN: { bg: 'rgba(100,116,139,0.25)', border: 'rgba(100,116,139,0.5)', text: '#334155' },
     DOCTOR: { bg: 'rgba(16,185,129,0.25)', border: 'rgba(16,185,129,0.5)', text: '#6ee7b7' },
     NURSE: { bg: 'rgba(6,182,212,0.25)', border: 'rgba(6,182,212,0.5)', text: '#67e8f9' },
     HR: { bg: 'rgba(245,158,11,0.25)', border: 'rgba(245,158,11,0.5)', text: '#fcd34d' },
@@ -73,10 +73,10 @@ const TopNavbar = ({ onHamburgerClick }) => {
             {/* Avatar circle with initials */}
             <div style={{
               width: 30, height: 30, borderRadius: '50%',
-              background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
+              background: 'linear-gradient(135deg, #475569, #1e293b)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '0.72rem', fontWeight: 700, color: '#fff',
-              flexShrink: 0, boxShadow: '0 2px 8px rgba(124,58,237,0.5)',
+              flexShrink: 0, boxShadow: '0 2px 8px rgba(71,85,105,0.5)',
             }}>
               {initials}
             </div>
@@ -93,19 +93,19 @@ const TopNavbar = ({ onHamburgerClick }) => {
               top: 'calc(100% + 10px)',
               right: 0,
               width: 300,
-              background: 'rgba(15, 10, 40, 0.92)',
+              background: 'rgba(255, 255, 255, 0.92)',
               backdropFilter: 'blur(28px)',
               WebkitBackdropFilter: 'blur(28px)',
-              border: '1px solid rgba(255,255,255,0.14)',
+              border: '1px solid rgba(100,116,139,0.15)',
               borderRadius: 18,
-              boxShadow: '0 20px 60px rgba(0,0,0,0.55)',
+              boxShadow: '0 20px 60px rgba(100,116,139,0.3)',
               zIndex: 1100,
               overflow: 'hidden',
               animation: 'fadeSlideDown 0.18s ease',
             }}>
               {/* Header band */}
               <div style={{
-                background: 'linear-gradient(135deg, rgba(124,58,237,0.6), rgba(79,70,229,0.5))',
+                background: 'linear-gradient(135deg, rgba(71,85,105,0.95), rgba(30,41,59,0.92))',
                 padding: '20px 20px 16px',
                 textAlign: 'center',
                 borderBottom: '1px solid rgba(255,255,255,0.1)',
@@ -113,11 +113,11 @@ const TopNavbar = ({ onHamburgerClick }) => {
                 {/* Large avatar */}
                 <div style={{
                   width: 64, height: 64, borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
+                  background: 'linear-gradient(135deg, #475569, #1e293b)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '1.4rem', fontWeight: 800, color: '#fff',
                   margin: '0 auto 12px',
-                  boxShadow: '0 4px 18px rgba(124,58,237,0.6)',
+                  boxShadow: '0 4px 18px rgba(71,85,105,0.6)',
                   border: '2px solid rgba(255,255,255,0.25)',
                 }}>
                   {initials}
@@ -152,22 +152,22 @@ const TopNavbar = ({ onHamburgerClick }) => {
                   <div key={row.label} style={{
                     display: 'flex', alignItems: 'center', gap: 10,
                     padding: '9px 0',
-                    borderBottom: '1px solid rgba(255,255,255,0.06)',
+                    borderBottom: '1px solid rgba(100,116,139,0.12)',
                   }}>
                     <span style={{
                       width: 28, height: 28, borderRadius: 8,
-                      background: 'rgba(255,255,255,0.07)',
+                      background: 'rgba(100,116,139,0.1)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: 'rgba(255,255,255,0.5)', flexShrink: 0,
+                      color: 'rgba(30,41,59,0.55)', flexShrink: 0,
                     }}>
                       {row.icon}
                     </span>
                     <div style={{ minWidth: 0 }}>
-                      <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1 }}>
+                      <div style={{ fontSize: '0.68rem', color: 'rgba(30,41,59,0.45)', lineHeight: 1 }}>
                         {row.label}
                       </div>
                       <div style={{
-                        fontSize: '0.84rem', color: '#e2d9f3', fontWeight: 500,
+                        fontSize: '0.84rem', color: '#1e293b', fontWeight: 500,
                         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                       }}>
                         {row.value || '--'}
@@ -185,16 +185,16 @@ const TopNavbar = ({ onHamburgerClick }) => {
                     width: '100%',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                     padding: '9px 0',
-                    background: 'rgba(239,68,68,0.12)',
+                    background: 'rgba(239,68,68,0.1)',
                     border: '1px solid rgba(239,68,68,0.35)',
                     borderRadius: 10,
-                    color: '#f87171',
+                    color: '#dc2626',
                     fontSize: '0.86rem', fontWeight: 600,
                     cursor: 'pointer',
                     transition: 'all 0.2s',
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.28)'; e.currentTarget.style.color = '#fff'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.12)'; e.currentTarget.style.color = '#f87171'; }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.85)'; e.currentTarget.style.color = '#fff'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.1)'; e.currentTarget.style.color = '#dc2626'; }}
                 >
                   <FaSignOutAlt size={13} /> Sign Out
                 </button>

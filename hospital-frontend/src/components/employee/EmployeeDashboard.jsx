@@ -4,6 +4,7 @@ import { FaCheckCircle, FaTimesCircle, FaCalendarAlt, FaMoneyBillWave, FaUserCir
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { getMyProfile, getMyMonthlySummary, getMyPayrollHistory } from '../../api/employeeApi';
+import WorkTimerCard from './WorkTimerCard';
 
 const StatCard = ({ icon, label, value, sub, color, onClick }) => (
   <Card className="border-0 h-100" style={{ cursor: onClick ? 'pointer' : 'default' }} onClick={onClick}>
@@ -17,9 +18,9 @@ const StatCard = ({ icon, label, value, sub, color, onClick }) => (
         {icon}
       </div>
       <div>
-        <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)' }}>{label}</div>
-        <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>{value ?? '--'}</div>
-        {sub && <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>{sub}</div>}
+        <div style={{ fontSize: '0.75rem', color: 'rgba(30,41,59,0.5)' }}>{label}</div>
+        <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#1e293b', lineHeight: 1.2 }}>{value ?? '--'}</div>
+        {sub && <div style={{ fontSize: '0.72rem', color: 'rgba(30,41,59,0.45)' }}>{sub}</div>}
       </div>
     </Card.Body>
   </Card>
@@ -74,32 +75,32 @@ const EmployeeDashboard = () => {
     <div>
       {/* Welcome banner */}
       <div style={{
-        background: 'linear-gradient(135deg, rgba(124,58,237,0.35), rgba(79,70,229,0.25))',
-        border: '1px solid rgba(139,92,246,0.3)',
+        background: 'linear-gradient(135deg, rgba(71,85,105,0.18), rgba(100,116,139,0.12))',
+        border: '1px solid rgba(100,116,139,0.25)',
         borderRadius: 18, padding: '24px 28px', marginBottom: 28,
         display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap',
       }}>
         <div style={{
           width: 60, height: 60, borderRadius: '50%',
-          background: 'linear-gradient(135deg,#7c3aed,#4f46e5)',
+          background: 'linear-gradient(135deg,#475569,#1e293b)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: '1.5rem', fontWeight: 800, color: '#fff', flexShrink: 0,
         }}>
           {user?.fullName?.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
         </div>
         <div>
-          <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)' }}>{greeting()},</div>
-          <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff' }}>{user?.fullName}</div>
+          <div style={{ fontSize: '0.78rem', color: 'rgba(30,41,59,0.55)' }}>{greeting()},</div>
+          <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#1e293b' }}>{user?.fullName}</div>
           <div style={{ display: 'flex', gap: 8, marginTop: 6, flexWrap: 'wrap' }}>
             {profile && (
               <>
-                <span style={{ padding:'2px 10px', borderRadius:20, fontSize:'0.72rem', background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.15)', color:'rgba(255,255,255,0.7)' }}>
+                <span style={{ padding:'2px 10px', borderRadius:20, fontSize:'0.72rem', background:'rgba(100,116,139,0.12)', border:'1px solid rgba(100,116,139,0.25)', color:'#334155' }}>
                   {profile.employeeId}
                 </span>
-                <span style={{ padding:'2px 10px', borderRadius:20, fontSize:'0.72rem', background:'rgba(139,92,246,0.2)', border:'1px solid rgba(139,92,246,0.35)', color:'#c4b5fd' }}>
+                <span style={{ padding:'2px 10px', borderRadius:20, fontSize:'0.72rem', background:'rgba(71,85,105,0.15)', border:'1px solid rgba(71,85,105,0.3)', color:'#334155' }}>
                   {profile.designation?.replace(/_/g,' ')}
                 </span>
-                <span style={{ padding:'2px 10px', borderRadius:20, fontSize:'0.72rem', background:'rgba(6,182,212,0.15)', border:'1px solid rgba(6,182,212,0.3)', color:'#67e8f9' }}>
+                <span style={{ padding:'2px 10px', borderRadius:20, fontSize:'0.72rem', background:'rgba(6,182,212,0.15)', border:'1px solid rgba(6,182,212,0.3)', color:'#0e7490' }}>
                   {profile.department}
                 </span>
               </>
@@ -107,12 +108,14 @@ const EmployeeDashboard = () => {
           </div>
         </div>
         <div style={{ marginLeft:'auto', textAlign:'right' }}>
-          <div style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.4)' }}>Today</div>
-          <div style={{ fontSize:'0.9rem', color:'rgba(255,255,255,0.8)', fontWeight:500 }}>
+          <div style={{ fontSize:'0.72rem', color:'rgba(30,41,59,0.5)' }}>Today</div>
+          <div style={{ fontSize:'0.9rem', color:'rgba(30,41,59,0.85)', fontWeight:500 }}>
             {now.toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric' })}
           </div>
         </div>
       </div>
+
+      <WorkTimerCard />
 
       {/* Stat cards */}
       <Row className="g-3 mb-4">
@@ -131,7 +134,7 @@ const EmployeeDashboard = () => {
         </Col>
         <Col xs={6} md={4} xl={2}>
           <StatCard icon={<FaClock />} label="Work Days" value={workDays}
-            sub="Recorded total" color="#8b5cf6" onClick={() => navigate('/employee/schedule')} />
+            sub="Recorded total" color="#475569" onClick={() => navigate('/employee/schedule')} />
         </Col>
         <Col xs={6} md={4} xl={2}>
           <StatCard icon={<FaMoneyBillWave />}
@@ -150,7 +153,7 @@ const EmployeeDashboard = () => {
       <Row className="g-3">
         <Col lg={5}>
           <Card className="border-0 h-100">
-            <Card.Header style={{ background:'transparent', borderBottom:'1px solid rgba(255,255,255,0.08)', fontWeight:600 }}>
+            <Card.Header style={{ background:'transparent', borderBottom:'1px solid rgba(100,116,139,0.15)', fontWeight:600 }}>
               My Profile
             </Card.Header>
             <Card.Body>
@@ -166,9 +169,9 @@ const EmployeeDashboard = () => {
                     { label:'Date Joined',  value: profile.dateOfJoining || '--' },
                     { label:'Status',       value: profile.status },
                   ].map(row => (
-                    <div key={row.label} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'6px 0', borderBottom:'1px solid rgba(255,255,255,0.05)' }}>
-                      <span style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.45)' }}>{row.label}</span>
-                      <span style={{ fontSize:'0.85rem', color:'#e2d9f3', fontWeight:500 }}>{row.value}</span>
+                    <div key={row.label} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'6px 0', borderBottom:'1px solid rgba(100,116,139,0.12)' }}>
+                      <span style={{ fontSize:'0.8rem', color:'rgba(30,41,59,0.5)' }}>{row.label}</span>
+                      <span style={{ fontSize:'0.85rem', color:'#1e293b', fontWeight:500 }}>{row.value}</span>
                     </div>
                   ))}
                 </div>
@@ -181,14 +184,14 @@ const EmployeeDashboard = () => {
 
         <Col lg={7}>
           <Card className="border-0 h-100">
-            <Card.Header style={{ background:'transparent', borderBottom:'1px solid rgba(255,255,255,0.08)', fontWeight:600 }}>
+            <Card.Header style={{ background:'transparent', borderBottom:'1px solid rgba(100,116,139,0.15)', fontWeight:600 }}>
               Quick Actions
             </Card.Header>
             <Card.Body>
               <Row className="g-3">
                 {[
                   { icon:'📍', title:'Mark Attendance',   sub:'Geo-fence check-in',       path:'/employee/attendance',   color:'rgba(16,185,129,0.15)',  border:'rgba(16,185,129,0.3)' },
-                  { icon:'📅', title:'Work Schedule',     sub:'View your weekly shifts',   path:'/employee/schedule',     color:'rgba(139,92,246,0.15)', border:'rgba(139,92,246,0.3)' },
+                  { icon:'📅', title:'Work Schedule',     sub:'View your weekly shifts',   path:'/employee/schedule',     color:'rgba(71,85,105,0.12)', border:'rgba(71,85,105,0.28)' },
                   { icon:'💰', title:'My Payslips',       sub:'Download payslips',         path:'/employee/payslips',     color:'rgba(6,182,212,0.15)',  border:'rgba(6,182,212,0.3)' },
                   { icon:'🎫', title:'Support Tickets',   sub:'Raise or view tickets',     path:'/tickets',               color:'rgba(249,115,22,0.15)', border:'rgba(249,115,22,0.3)' },
                 ].map(item => (
@@ -204,8 +207,8 @@ const EmployeeDashboard = () => {
                       onMouseLeave={e => e.currentTarget.style.transform='translateY(0)'}
                     >
                       <div style={{ fontSize:'1.6rem', marginBottom:6 }}>{item.icon}</div>
-                      <div style={{ fontWeight:600, fontSize:'0.88rem', color:'#fff' }}>{item.title}</div>
-                      <div style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.45)', marginTop:2 }}>{item.sub}</div>
+                      <div style={{ fontWeight:600, fontSize:'0.88rem', color:'#1e293b' }}>{item.title}</div>
+                      <div style={{ fontSize:'0.72rem', color:'rgba(30,41,59,0.5)', marginTop:2 }}>{item.sub}</div>
                     </div>
                   </Col>
                 ))}
